@@ -1,0 +1,352 @@
+$special-grey: #313234
+$special-grey-2: #888
+$special-blue: #73c9d7
+
+@mixin transform ($scale)
+	-webkit-transform: scale($scale)
+	-ms-transform: scale($scale)
+	transform: scale($scale)
+
+@mixin awesome-background ($direction, $color-1, $color-2)
+	background: -webkit-linear-gradient($direction, $color-1, $color-2)
+	background: -o-linear-gradient($direction, $color-1, $color-2)
+	background: -moz-linear-gradient($direction, $color-1, $color-2)
+	background: linear-gradient(to $direction, $color-1, $color-2)	
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,800")
+
+* 
+	box-sizing: border-box
+
+[class*="col-"]
+	float: left
+	min-height: 1px
+	padding: 15px
+	img
+		width: 100%
+
+.row
+	margin: 10px
+	margin-top: 0
+	&:before,
+	&:after
+		content: ""
+		display: table
+		clear: both
+
+@media (max-width: 767px)
+	@for $i from 1 through 12
+		.col-s-#{$i}
+			width: (100% / 12 * $i)	
+	@for $i from 0 through 12
+		.col-s-offset-#{$i}
+			margin-left: (100% / 12 * $i)
+
+@media (min-width: 768px)
+	@for $i from 1 through 12
+		.col-m-#{$i}
+			width: (100% / 12 * $i)	
+	@for $i from 0 through 12
+		.col-m-offset-#{$i}
+			margin-left: (100% / 12 * $i)
+
+.container
+	width: 100%
+	max-width: 1200px
+	margin: 0 auto
+
+body
+	margin: 0
+	font-family: 'Open Sans', sans-serif
+
+header
+	background-color: $special-grey
+	height: auto
+	> nav 
+		> img 
+			padding: 10px 0
+		ul
+			margin: 0
+			padding: 0
+			list-style-type: none
+			float: right
+			> li
+				display: inline-block
+				a
+					line-height: 50px
+					padding: 0 20px
+					display: block
+					text-decoration: none
+					color: $special-grey-2
+					text-transform: uppercase
+					&:hover 
+						background: $special-grey-2
+						color: $special-grey
+	
+.hero
+	background-image: url("https://images.unsplash.com/photo-1501959181532-7d2a3c064642?dpr=1&auto=format&fit=crop&w=1199&h=779&q=80&cs=tinysrgb&crop=")
+	width: 100%
+	height: 100vh
+
+.slogan
+	background-color: rgba(0, 0, 0, 0.5)
+	max-width: 800px
+	float: right
+	padding: 0 15px
+	margin: 40vh 0
+	color: white
+	text-transform: uppercase
+	%slogan-extend
+		font-size: 25px
+		padding-right: 100px
+		text-align: left
+	h1
+		font-weight: 900
+		margin: 0 0 10px 10px
+		@extend %slogan-extend
+	p
+		margin: 10px 0 0 10px
+		@extend %slogan-extend
+
+.benefits
+	text-align: center
+	color: $special-grey-2
+	> .row
+		margin: 50px auto
+	a
+		text-decoration: none
+		color: white
+		&:hover 
+			.fa
+				background-color: $special-blue
+			h2
+				color: $special-blue
+
+	.fa 
+		font-size: 50px
+		padding: 15px
+		background-color: $special-grey
+		border-radius: 25%
+	h2
+		text-transform: uppercase
+		color: $special-grey
+
+.featured 
+	text-align: center
+	h2 
+		color: $special-grey
+		text-transform: uppercase	
+	p 
+		color: $special-grey-2
+
+.gallery 
+	.row 
+		margin: 0
+	[class*="col-"] 
+		padding: 0
+		height: 150px
+		position: relative
+		&:hover .layer 
+			display: inline	
+	[class*="photo-"]
+		background-size: cover
+		width: 100%
+		height: 100%
+	img
+		height: 100%
+		min-width: 100%
+		width: auto	
+	.layer
+		position: absolute
+		height: 100%
+		width: 100%
+		background-color: rgba(0, 0, 0, 0.7)
+		display: none
+		.fa
+			position: absolute
+			font-size: 20px
+			padding: 10px
+			top: calc(50% - 20px)
+			background-color: white
+			border-radius: 25%
+			cursor: pointer
+			color: $special-grey
+		.fa-link
+			left: calc(50% - 50px)
+		.fa-search
+			right: calc(50% - 50px)
+
+.people
+	[class*="col-"]
+		position: relative
+		margin-right: 2vw
+		h2
+			text-align: center
+			width: 100%
+			color: $special-grey
+		%people-properties
+			width: 100%
+			height: 150px
+			background-size: cover
+			border-radius: 50%
+			position: relative
+			&:hover .layer 
+				display: inline
+				p 
+					display: inline
+			.layer 
+				position: absolute
+				width: 100%
+				height: 150px
+				border-radius: 50%
+				background-color: rgba(0, 0, 0, 0.6)
+				display: none
+				p
+					position: absolute
+					font-size: 20px
+					top: calc(50% - 40px)
+					width: 100%
+					text-align: center
+					display: none
+					color: white
+		.lincoln
+			background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/ab/Abraham_Lincoln_O-77_matte_collodion_print.jpg")
+			@extend %people-properties
+		.einstein
+			background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/170px-Albert_Einstein_Head.jpg")
+			@extend %people-properties
+		.bolt
+			background-image: url("https://www.thesun.co.uk/wp-content/uploads/2017/07/nintchdbpict000296956128.jpg?strip=all&w=960")
+			@extend %people-properties
+		.chopin
+			background-image: url("https://upload.wikimedia.org/wikipedia/commons/e/e8/Frederic_Chopin_photo.jpeg")
+			@extend %people-properties
+	
+.awesome 
+	.photo img 
+		height: 100%
+		width: 100%
+	p
+		text-align: justify
+		color: $special-grey-2
+	h2
+		font-size: 35px
+		padding: 0
+		margin-top: 20px
+		margin-left: 20px
+		text-transform: uppercase
+		font-weight: bold
+		color: $special-grey
+
+.numbers
+	%numbers-extend
+		padding: 0
+		margin: 0
+		text-align: center
+		font-weight: bold
+	h2
+		color: $special-grey
+		font-size: 35px
+		@extend %numbers-extend
+	p
+		color: $special-blue
+		text-transform: uppercase
+		@extend %numbers-extend
+	
+
+.info
+	margin-bottom: 0
+	padding-bottom: 5px
+	> .row
+		color: white
+		margin-bottom: 0
+		background-color: $special-grey
+	h2
+		position: relative
+		&:after
+			content: ""
+			width: 50%
+			height: 2px
+			background-color: white
+			position: absolute
+			top: 17px
+
+.contact h3, 
+.contact p, 
+.contact [class*="col-"], 
+.contact .row
+	padding: 0
+	margin-top: 0
+	margin-bottom: 0
+
+.icon-btn
+	border: 0
+	background-color: $special-blue
+	height: 40px
+	width: 40px
+	font-size: 20px
+	cursor: pointer
+	color: white
+	&:hover
+		@include transform (1.10)
+		color: $special-grey
+
+footer
+	margin-top: 0
+	width: 100%
+	text-align: center
+	.row 
+		margin: 0
+	p
+		padding-top: 15px
+		background-color: $special-grey
+		height: 50px
+		color: white
+
+@media (max-width: 767px)
+	header
+		text-align: center
+		> nav ul
+			float: none
+			display: block
+			> li
+				display: block
+	
+	.hero
+		height: 100vh
+		width: auto
+		background-size: cover
+	
+	.benefits [class*="col-"]
+		width: 100%
+	.gallery .layer
+		display: block
+		background-color: initial
+		.fa
+			top: 10px
+			border: 1px solid $special-grey
+		.fa-search
+			left: 10px
+			right: initial
+		.fa-link
+			left: 60px
+			right: initial
+	
+	.awesome
+		@include awesome-background (bottom right, #727272, $special-grey)
+		h2,
+		p
+			color: white
+		img
+			display: none
+
+	.info
+		.contact [class*="col-s"]
+			margin-top: 15px
+			p
+				margin-left: 10px
+		.social .icon-btn
+			width: 60px
+			height: 60px
+			margin-left: 25px
+			margin-bottom: 25px
